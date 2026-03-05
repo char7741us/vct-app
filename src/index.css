@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #002B49;
+  --color-navy-50: #f0f4f8;
+  --color-lime: #B2D235;
+  --color-lime-50: #f7fee7;
+  --color-lime-100: #ecfccb;
+  --color-lime-800: #3f4d13;
+  --color-lime-900: #1e2609;
+
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-amber: #F59E0B;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'DM Serif Display', serif;
+}
+
+/* Base styling */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: theme('colors.slate.50');
+    color: theme('colors.slate.800');
+    font-family: theme('fontFamily.sans');
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: theme('fontFamily.serif');
+    color: theme('colors.navy');
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .mobile-container {
+    @apply max-w-[480px] mx-auto bg-slate-50 min-h-screen relative flex flex-col shadow-[0_0_40px_rgba(0, 0, 0, 0.05)];
+  }
+
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+
+  .glass-card {
+    @apply bg-white/90 backdrop-blur-sm border border-white/50 shadow-sm rounded-2xl;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Progress Bar */
+.progress-bar {
+  @apply h-1.5 bg-slate-100 w-full rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full bg-lime transition-all duration-500 ease-out;
+}
+
+/* Components */
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-2xl font-bold cursor-pointer transition-all duration-200 border-none text-base flex items-center justify-center gap-2 active:scale-95;
+  }
+
+  .btn-primary {
+    @apply bg-navy text-white hover:bg-navy/90 shadow-md shadow-navy/20;
+  }
+
+  .btn-lime {
+    @apply bg-lime text-navy hover:bg-lime/90 shadow-md shadow-lime/20;
+  }
+
+  .btn-outline {
+    @apply bg-white border-2 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50;
+  }
+
+  .vct-card {
+    @apply p-5 rounded-[24px] bg-white border border-slate-100 shadow-sm transition-shadow hover:shadow-md;
+  }
+
+  /* Inputs */
+  .input-group {
+    @apply mb-6;
+  }
+
+  .input-label {
+    @apply block text-xs font-extrabold mb-2 text-slate-400 uppercase tracking-widest;
+  }
+
+  .text-input {
+    @apply w-full p-4 rounded-2xl border-2 border-slate-100 text-base font-medium text-navy bg-slate-50 transition-all duration-200 outline-none focus:border-lime focus:bg-white focus:ring-4 focus:ring-lime/10;
+  }
+
+  /* VCT Checklist */
+  .check-item {
+    @apply flex flex-col p-5 rounded-[24px] bg-white border border-slate-100 mb-4 shadow-sm;
+  }
+
+  .check-options {
+    @apply grid grid-cols-2 gap-3;
+  }
+
+  .option-btn {
+    @apply p-3.5 rounded-2xl text-center font-extrabold border-2 border-slate-100 bg-white text-xs tracking-wide transition-all duration-200 text-slate-400 hover:border-slate-200 hover:bg-slate-50;
+  }
+
+  .option-btn.selected-success {
+    @apply bg-success text-white border-success shadow-[0_8px_16px_-4px_rgba(16, 185, 129, 0.3)] hover:bg-success hover:border-success;
+  }
+
+  .option-btn.selected-error {
+    @apply bg-error text-white border-error shadow-[0_8px_16px_-4px_rgba(239, 68, 68, 0.3)] hover:bg-error hover:border-error;
+  }
+}
