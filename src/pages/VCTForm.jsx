@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Save, CheckCircle2, ChevronRight, User, Settings, Info as InfoIcon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Save, CheckCircle2, Info as InfoIcon } from 'lucide-react';
 import { SEED_DATA } from '../data/seedData';
 import CheckItem from '../components/CheckItem';
 import SignaturePad from '../components/SignaturePad';
@@ -28,7 +28,6 @@ const VCTForm = () => {
         results: {} // step_id -> { has_deviation, observation, cause, countermeasure }
     });
 
-    const currentProcedure = SEED_DATA.procedures.find(p => p.id === formData.procedure_id);
     const currentSteps = SEED_DATA.steps[formData.procedure_id] || [];
 
     const handleNext = () => setStep(s => Math.min(s + 1, 4));
