@@ -16,16 +16,17 @@ const Layout = ({ children }) => {
 
     return (
         <div className="mobile-container">
-            <header className="glass p-4 sticky top-0 z-50 flex justify-between items-center border-b border-slate-100">
+            <header className="glass p-4 sticky top-0 z-50 flex justify-between items-center bg-argos-navy text-white">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-lime rounded-xl flex items-center justify-center font-bold text-navy shadow-sm">
-                        A
-                    </div>
-                    <h1 className="text-xl m-0 leading-none tracking-tight">Argos VCT</h1>
+                    <img
+                        src="https://brandcenter.argos.co/wp-content/uploads/2024/02/ARGOS_BC_logotipo.png"
+                        alt="Argos VCT"
+                        className="h-6 object-contain filter brightness-0 invert"
+                    />
                 </div>
                 {!hideNav && (
                     <button
-                        className="p-2 text-slate-400 hover:text-navy hover:bg-slate-100 rounded-xl transition-all"
+                        className="p-2 text-white/70 hover:text-white rounded-sm transition-all"
                         onClick={() => navigate('/login')}
                         aria-label="Cerrar sesión"
                     >
@@ -39,25 +40,25 @@ const Layout = ({ children }) => {
             </main>
 
             {!hideNav && (
-                <nav className="fixed bottom-0 left-0 right-0 max-w-[480px] mx-auto bg-white/90 backdrop-blur-md border-t border-slate-100 p-2 flex justify-around items-center z-50 pb-[max(env(safe-area-inset-bottom),8px)] shadow-[0_-4px_24px_rgba(0,0,0,0.02)]">
+                <nav className="fixed bottom-0 left-0 right-0 max-w-[480px] mx-auto bg-white border-t border-slate-200 p-2 flex justify-around items-center z-50 pb-[max(env(safe-area-inset-bottom),8px)] argos-shadow">
                     {navItems.map((item) => {
                         const isActive = location.pathname === item.path;
                         return (
                             <button
                                 key={item.path}
                                 onClick={() => navigate(item.path)}
-                                className={`flex flex-col items-center gap-1.5 p-3 rounded-2xl transition-all flex-1 ${isActive
-                                        ? 'text-navy font-bold bg-slate-50 relative'
-                                        : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50/50'
+                                className={`flex flex-col items-center gap-1.5 p-3 rounded-sm transition-all flex-1 ${isActive
+                                    ? 'text-argos-navy font-bold bg-slate-50 relative'
+                                    : 'text-slate-400 hover:text-slate-600 hover:bg-slate-50/50'
                                     }`}
                             >
                                 {isActive && (
-                                    <div className="absolute top-0 w-8 h-1 bg-lime rounded-b-full shadow-[0_0_8px_rgba(178,210,53,0.5)]"></div>
+                                    <div className="absolute top-0 w-8 h-1 bg-argos-lime"></div>
                                 )}
-                                <div className={`${isActive ? 'scale-110 text-lime-800' : ''} transition-transform duration-300`}>
+                                <div className={`${isActive ? 'scale-110 text-argos-navy' : ''} transition-transform duration-300`}>
                                     {item.icon}
                                 </div>
-                                <span className={`text-[10px] tracking-widest uppercase ${isActive ? 'font-black' : 'font-semibold'}`}>
+                                <span className={`text-[10px] uppercase ${isActive ? 'font-bold' : 'font-medium'}`} style={{ fontFamily: 'Trebuchet MS' }}>
                                     {item.label}
                                 </span>
                             </button>

@@ -18,13 +18,13 @@ const SignaturePad = ({ label, onSave, signature }) => {
 
     return (
         <div className="input-group">
-            <label className="input-label">{label}</label>
-            <div className="relative border-2 border-slate-100 rounded-3xl overflow-hidden bg-slate-50/50 group transition-all duration-300 focus-within:border-navy/20">
+            <label className="input-label mb-2 block">{label}</label>
+            <div className="relative border border-slate-300 rounded-sm overflow-hidden bg-white transition-all duration-300 focus-within:border-argos-lime">
                 {!signature ? (
                     <>
                         <SignatureCanvas
                             ref={sigPad}
-                            penColor="#002B49"
+                            penColor="#071D49"
                             canvasProps={{
                                 style: { width: '100%', height: '180px' },
                                 className: 'sigCanvas cursor-crosshair'
@@ -34,27 +34,27 @@ const SignaturePad = ({ label, onSave, signature }) => {
                         <button
                             type="button"
                             onClick={clear}
-                            className="absolute right-3 bottom-3 p-2.5 bg-white rounded-xl shadow-sm text-slate-400 hover:text-error hover:bg-error/5 transition-colors"
+                            className="absolute right-2 bottom-2 p-2 bg-slate-100 rounded-sm text-slate-500 hover:text-error hover:bg-error/10 transition-colors"
                         >
-                            <Trash2 size={16} />
+                            <Trash2 size={18} />
                         </button>
-                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.03] flex flex-col items-center gap-3">
-                            <PenTool size={48} />
-                            <p className="text-2xl font-black uppercase tracking-[0.2em]">Firma Aquí</p>
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.05] flex flex-col items-center gap-2">
+                            <PenTool size={32} />
+                            <p className="text-xl font-bold uppercase tracking-widest font-sans">Área de Firma</p>
                         </div>
                     </>
                 ) : (
-                    <div className="flex flex-col items-center justify-center h-[180px] bg-emerald-50 relative animate-fade-in group/sig">
+                    <div className="flex flex-col items-center justify-center h-[180px] bg-slate-50 relative animate-fade-in group/sig">
                         <img src={signature} alt="Firma" className="max-h-[140px] mix-blend-multiply transition-transform group-hover/sig:scale-105 duration-500" />
                         <button
                             type="button"
                             onClick={() => onSave(null)}
-                            className="absolute right-3 bottom-3 p-2.5 bg-white rounded-xl shadow-sm text-error hover:bg-error/10 transition-colors"
+                            className="absolute right-2 bottom-2 p-2 bg-white rounded-sm shadow-sm border border-slate-200 text-error hover:bg-error/10 transition-colors"
                         >
-                            <Trash2 size={16} />
+                            <Trash2 size={18} />
                         </button>
-                        <div className="absolute top-3 left-3 flex items-center gap-1.5 text-emerald-700 font-black text-[10px] uppercase tracking-widest bg-emerald-100/50 px-2 py-1 rounded-lg backdrop-blur-sm">
-                            <CheckCircle size={12} /> Firma Capturada
+                        <div className="absolute top-2 left-2 flex items-center gap-1.5 text-success font-bold text-[10px] uppercase tracking-widest bg-success/10 px-2 py-1 border border-success/20 rounded-sm" style={{ fontFamily: 'Trebuchet MS' }}>
+                            <CheckCircle size={14} /> CERTIFICADA
                         </div>
                     </div>
                 )}
