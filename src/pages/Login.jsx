@@ -21,11 +21,12 @@ const Login = () => {
             navigate('/');
         } catch (err) {
             // Mensajes de error amigables en español
-            if (err.message.includes('Invalid login credentials')) {
+            const errorMessage = err?.message || '';
+            if (errorMessage.includes('Invalid login credentials')) {
                 setError('Correo o contraseña incorrectos. Verifica tus datos.');
-            } else if (err.message.includes('Email not confirmed')) {
+            } else if (errorMessage.includes('Email not confirmed')) {
                 setError('Debes confirmar tu correo antes de ingresar. Revisa tu bandeja de entrada.');
-            } else if (err.message.includes('Too many requests')) {
+            } else if (errorMessage.includes('Too many requests')) {
                 setError('Demasiados intentos. Espera un momento e intenta nuevamente.');
             } else {
                 setError(err.message || 'Error al iniciar sesión. Intenta de nuevo.');
