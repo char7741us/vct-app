@@ -1,10 +1,22 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Home, PlusSquare, ClipboardList, LogOut } from 'lucide-react';
+import { signOut } from '../lib/supabase';
+import { useAuth } from '../context/AuthContext';
 
 const Layout = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { user } = useAuth();
+
+    const handleLogout = async () => {
+        try {
+            await signOut();
+            navigate('/login', { replace: true });
+        } catch (err) {
+            console.error('Error al cerrar sesión:', err);
+        }
+    };
 
     const navItems = [
         { icon: <Home size={24} />, label: 'Inicio', path: '/' },
@@ -25,13 +37,21 @@ const Layout = ({ children }) => {
                     />
                 </div>
                 {!hideNav && (
-                    <button
-                        className="p-2 text-white/70 hover:text-white rounded-sm transition-all"
-                        onClick={() => navigate('/login')}
-                        aria-label="Cerrar sesión"
-                    >
-                        <LogOut size={22} />
-                    </button>
+                    <div className="flex items-center gap-2">
+                        {user?.email && (
+                            <span className="text-white/60 text-[10px] uppercase tracking-wider hidden sm:block" style={{ fontFamily: 'Trebuchet MS' }}>
+                                {user.email.split('@')[0]}
+                            </span>
+                        )}
+                        <button
+                            className="p-2 text-white/70 hover:text-white rounded-sm transition-all"
+                            onClick={handleLogout}
+                            aria-label="Cerrar sesión"
+                            title="Cerrar sesión"
+                        >
+                            <LogOut size={22} />
+                        </button>
+                    </div>
                 )}
             </header>
 
