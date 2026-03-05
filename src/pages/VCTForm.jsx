@@ -54,7 +54,6 @@ const VCTForm = () => {
 
     const submitVCT = () => {
         // In a real app, send to Supabase here
-        console.log('Submitting VCT:', formData);
         alert('VCT Guardado Exitosamente (Modo Demo)');
         navigate('/');
     };
