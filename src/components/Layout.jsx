@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, PlusSquare, ClipboardList, LogOut } from 'lucide-react';
+import { Home, PlusSquare, ClipboardList, LogOut, AlertCircle } from 'lucide-react';
 import { signOut } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
 
@@ -8,13 +8,14 @@ const Layout = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { user } = useAuth();
+    const [logoutError, setLogoutError] = useState("");
 
     const handleLogout = async () => {
         try {
             await signOut();
             navigate('/login', { replace: true });
         } catch (err) {
-            console.error('Error al cerrar sesión:', err);
+            setLogoutError(err.message || 'Error al cerrar sesión. Intenta de nuevo.');
         }
     };
 
@@ -56,6 +57,12 @@ const Layout = ({ children }) => {
             </header>
 
             <main className="flex-1 p-5 overflow-y-auto pb-28">
+                {logoutError && (
+                    <div className="mb-4 flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm">
+                        <AlertCircle size={16} className="mt-0.5 shrink-0" />
+                        <span>{logoutError}</span>
+                    </div>
+                )}
                 {children}
             </main>
 
